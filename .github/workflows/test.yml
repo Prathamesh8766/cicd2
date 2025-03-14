@@ -20,10 +20,8 @@ jobs:
       - name: "Send Mail"
         run: python print.py
 
-      - name: "Trigers alert.yml"
-        if : failure()
-        run : |
-          echo "print.py failed! Trigger another pipeline alert.yml"
-          gh workflow run alert.yml --repo ${{ github.repository }} --ref ${{ github.ref }}
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: "Trigger Another Pipeline on Failure"
+        if: failure()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}  
+        run: gh workflow run alert.yml --repo ${{ github.repository }} --ref ${{ github.ref }}

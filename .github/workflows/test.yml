@@ -15,8 +15,11 @@ jobs:
           python-version: '3.x' 
 
       - name: "Install Dependencies"
-        run: python -m pip install --upgrade pip  
-      
+        run: python -m pip install --upgrade pip 
+         
+      - name: "Verify Files"
+        run: ls -R  
+
       - name: "Send Mail"
         run: python print.py
 
